@@ -17,71 +17,89 @@
         .header {
             background: linear-gradient(135deg, #0a2e4a 0%, #004d66 100%);
             color: white;
-            /* DYNAMIC PADDING: Pushes content below the notch/camera */
-            padding: calc(20px + env(safe-area-inset-top)) 20px 40px 20px;
+            /* DYNAMIC PADDING: Increased to 36px base to heavily push down below notches/dots */
+            padding: calc(36px + env(safe-area-inset-top)) 24px 40px 24px;
             /* Adds safe area padding to the sides for landscape mode */
-            padding-left: calc(20px + env(safe-area-inset-left));
-            padding-right: calc(20px + env(safe-area-inset-right));
+            padding-left: calc(24px + env(safe-area-inset-left));
+            padding-right: calc(24px + env(safe-area-inset-right));
         }
 
         .top-bar {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            margin-bottom: 30px;
-            gap: 10px; /* Adds breathing room between items */
+            margin-bottom: 32px;
+            min-height: 44px; /* Minimum Apple touch target height for easy tapping */
+            position: relative;
         }
 
         .back-btn {
-            background: none;
-            border: none;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             color: white;
-            font-size: 24px; /* Slightly larger for easier tapping */
-            font-weight: bold;
+            width: 44px; 
+            height: 44px;
+            border-radius: 50%;
             cursor: pointer;
-            padding: 0 5px;
-            flex-shrink: 0; /* Prevents the button from shrinking */
-        }
-
-        .header-title {
             display: flex;
             align-items: center;
-            justify-content: flex-start;
-            font-size: 11px; /* Slightly smaller to fit better */
-            font-weight: bold;
-            letter-spacing: 1px;
-            opacity: 0.9;
-            flex-grow: 1; /* Allows title to take available space */
-            flex-shrink: 1;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: background 0.2s;
+            backdrop-filter: blur(4px);
+            padding: 0;
+        }
+        
+        .back-btn:active {
+            background: rgba(255, 255, 255, 0.3);
         }
 
         .tbay-logo {
-            height: 16px; /* Slightly scaled down */
-            margin-right: 6px;
+            height: 28px; /* Increased for standard logo sizing */
             filter: brightness(0) invert(1); 
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
-        .claims-badge {
+        .header-badges {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        .badge.highlight {
             background-color: #00d2d3;
             color: #0a2e4a;
-            padding: 5px 8px;
-            border-radius: 12px;
-            font-size: 9px;
-            font-weight: 800;
-            white-space: nowrap; /* Prevents text from wrapping awkwardly */
-            flex-shrink: 0; /* Keeps badge perfectly shaped */
+            border-color: #00d2d3;
         }
 
         .hero-title {
-            font-size: 32px;
+            font-size: 36px;
+            font-weight: 800;
             line-height: 1.1;
-            margin-bottom: 15px;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+            margin-top: 0;
         }
 
         .hero-text {
-            font-size: 14px;
-            line-height: 1.5;
+            font-size: 15px;
+            line-height: 1.6;
             opacity: 0.9;
+            margin: 0;
         }
 
         .warning-banner {
@@ -294,12 +312,17 @@
     <div class="header">
         <div class="top-bar">
             <!-- This button defaults to hidden; JS will show it if iOS -->
-            <button id="top-back-btn" class="back-btn" style="display: none;">&lt;</button>
-            <div class="header-title">
-                <img src="https://mcusercontent.com/4ceda90aa48260f0c3c397068/images/3089e9cb-945f-b383-b957-d5175b3d8c39.png" alt="Tbay" class="tbay-logo">
-                TOP TRADERS &middot; JULY
-            </div>
-            <div class="claims-badge">1 CODE &middot; 3 CLAIMS</div>
+            <button id="top-back-btn" class="back-btn" style="display: none;" aria-label="Go back">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            <img src="https://mcusercontent.com/4ceda90aa48260f0c3c397068/images/3089e9cb-945f-b383-b957-d5175b3d8c39.png" alt="Tbay" class="tbay-logo">
+        </div>
+
+        <div class="header-badges">
+            <div class="badge">TOP TRADERS &middot; JULY</div>
+            <div class="badge highlight">1 CODE &middot; 3 CLAIMS</div>
         </div>
 
         <h1 class="hero-title">Thank you for trading with us</h1>
@@ -383,7 +406,7 @@
 
         // Setup the buttons based on the device
         if (isIOS) {
-            topBackBtn.style.display = 'block';
+            topBackBtn.style.display = 'flex';
             bottomActionBtn.innerText = 'Back to home';
             
             // Reusable back function for iOS
@@ -448,7 +471,7 @@
         // 3. TRACKING LOGIC (GOOGLE SHEETS)
         // ----------------------------------------------------
         // 🚨 REPLACE THIS WITH YOUR NEW WEB APP URL 🚨
-        const TRACKING_URL = "YOUR_NEW_APPS_SCRIPT_WEB_APP_URL_HERE";
+        const TRACKING_URL = "https://script.google.com/macros/s/AKfycbxpVzSZ7CRsOSfMxfr46bTusV0qq4wmtZO2x11Gg2C--tquvFfYuWFojQjyssjS2X3ADQ/exec";
 
         function generateUUID() {
             return 'xxxx-xxxx-4xxx-yxxx-xxxx'.replace(/[xy]/g, function(c) {
@@ -482,6 +505,8 @@
                 }).catch((err) => {
                     console.error("Tracking error:", err);
                 });
+            } else {
+                console.warn("Tracking skipped: TRACKING_URL placeholder has not been replaced.");
             }
         }
 
