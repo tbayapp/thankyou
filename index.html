@@ -2,337 +2,478 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Tbay - Top Traders Reward</title>
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                    },
-                    colors: {
-                        tbayDark: '#02182b', 
-                        tbayDarkSecondary: '#052a4a',
-                        tbayCyan: '#00cccc',
-                        tbayCyanLight: '#e6f7f7',
-                        textMain: '#1e293b',
-                        textMuted: '#64748b'
-                    }
-                }
-            }
-        }
-    </script>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Traders July Rewards</title>
     <style>
+        /* Hide the entire body initially until device is detected */
         body {
-            background-color: #f1f5f9;
-            -webkit-tap-highlight-color: transparent;
+            display: none;
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f6f8;
+            color: #1a2a3a;
         }
-        .app-container {
-            max-width: 480px;
-            margin: 0 auto;
-            background-color: #ffffff;
-            min-height: 100vh;
-            position: relative;
-            box-shadow: 0 0 40px rgba(0,0,0,0.05);
+
+        .header {
+            background: linear-gradient(135deg, #0a2e4a 0%, #004d66 100%);
+            color: white;
+            padding: 20px 20px 40px 20px;
+        }
+
+        .top-bar {
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
         }
-        /* Gradient for header */
-        .hero-gradient {
-            background: linear-gradient(145deg, #02182b 0%, #063156 100%);
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0;
         }
-        /* Custom dashed border for coupon */
-        .coupon-dashed {
-            background-image: linear-gradient(to right, #cbd5e1 50%, rgba(255,255,255,0) 0%), linear-gradient(to bottom, #cbd5e1 50%, rgba(255,255,255,0) 0%), linear-gradient(to right, #cbd5e1 50%, rgba(255,255,255,0) 0%), linear-gradient(to bottom, #cbd5e1 50%, rgba(255,255,255,0) 0%);
-            background-position: top, right, bottom, left;
-            background-repeat: repeat-x, repeat-y;
-            background-size: 10px 2px, 2px 10px;
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+
+        .tbay-logo {
+            height: 18px;
+            margin-right: 8px;
+            /* Makes the logo pure white to match the design */
+            filter: brightness(0) invert(1); 
+        }
+
+        .claims-badge {
+            background-color: #00d2d3;
+            color: #0a2e4a;
+            padding: 4px 10px;
             border-radius: 12px;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .hero-title {
+            font-size: 32px;
+            line-height: 1.1;
+            margin-bottom: 15px;
+        }
+
+        .hero-text {
+            font-size: 14px;
+            line-height: 1.5;
+            opacity: 0.9;
+        }
+
+        .warning-banner {
+            background-color: #e0f7fa;
+            color: #004d40;
+            padding: 15px 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .warning-icon {
+            background-color: #00d2d3;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            flex-shrink: 0;
+            font-weight: bold;
+        }
+
+        .content-section {
+            padding: 20px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            font-weight: bold;
+            color: #0a2e4a;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        .reward-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .card-top {
+            background-color: #0a2e4a;
+            color: white;
+            display: flex;
+            padding: 20px;
+        }
+
+        .rate-up-val {
+            font-size: 42px;
+            font-weight: 900;
+            color: #00d2d3;
+            line-height: 1;
+            margin-right: 20px;
+        }
+
+        .rate-up-label {
+            font-size: 10px;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+
+        .card-top-desc h4 {
+            margin: 0 0 5px 0;
+            font-size: 10px;
+            color: #00d2d3;
+            letter-spacing: 1px;
+        }
+
+        .card-top-desc p {
+            margin: 0;
+            font-size: 12px;
+            line-height: 1.4;
+            opacity: 0.9;
+        }
+
+        .card-bottom {
+            padding: 20px;
+        }
+
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .code-display {
+            flex-grow: 1;
+            background: #f4f6f8;
+            border: 1px dashed #cfd8dc;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 800;
+            color: #0a2e4a;
+            letter-spacing: 2px;
+        }
+
+        .copy-btn {
+            background-color: #00d2d3;
+            color: #0a2e4a;
+            border: none;
+            border-radius: 6px;
+            padding: 0 20px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .copy-btn.success {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .card-bottom-text {
+            font-size: 11px;
+            color: #546e7a;
+            margin: 0;
+        }
+
+        .steps-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 30px 0;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            font-size: 13px;
+            line-height: 1.5;
+            color: #1a2a3a;
+        }
+
+        .step-number {
+            background-color: #00d2d3;
+            color: #0a2e4a;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 12px;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .good-to-know {
+            background-color: #eceff1;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .good-to-know h4 {
+            margin: 0 0 10px 0;
+            font-size: 11px;
+            color: #546e7a;
+            letter-spacing: 1px;
+        }
+
+        .good-to-know p {
+            margin: 0;
+            font-size: 12px;
+            color: #546e7a;
+            line-height: 1.5;
+        }
+
+        .footer {
+            background-color: #0a2e4a;
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .footer h2 {
+            font-size: 24px;
+            margin: 0 0 20px 0;
+            text-align: left;
+        }
+
+        .main-cta {
+            background-color: #00d2d3;
+            color: #0a2e4a;
+            border: none;
+            border-radius: 8px;
+            width: 100%;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
 
-    <div class="app-container">
-        
-        <!-- Header / Hero Section -->
-        <div class="hero-gradient text-white px-6 pt-[max(48px,env(safe-area-inset-top))] pb-10">
-            <!-- Top Nav Bar -->
-            <div class="flex justify-between items-center mb-8 h-8">
-                <!-- Back Button (Hidden by default, shown via JS for iOS) -->
-                <button id="headerBackBtn" onclick="routeAction()" class="hidden items-center justify-center w-8 h-8 -ml-2 rounded-full hover:bg-white/10 active:bg-white/20 transition-colors">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="15 18 9 12 15 6"></polyline>
-                    </svg>
-                </button>
-                
-                <div class="flex-grow flex items-center justify-start gap-2.5" id="headerTitleWrapper">
-                    <img src="https://mcusercontent.com/4ceda90aa48260f0c3c397068/images/3089e9cb-945f-b383-b957-d5175b3d8c39.png" alt="Tbay Logo" class="h-4 brightness-0 invert">
-                    <div class="w-[1px] h-3 bg-white/30 rounded-full"></div>
-                    <span class="text-tbayCyan text-[11px] font-bold tracking-[0.15em] uppercase mt-[1px]">TOP TRADERS · JULY</span>
-                </div>
-
-                <div class="bg-tbayCyan text-tbayDark text-[10px] font-extrabold px-3 py-1.5 rounded-full uppercase tracking-wider shrink-0">
-                    1 CODE · 3 CLAIMS
-                </div>
+    <div class="header">
+        <div class="top-bar">
+            <!-- This button defaults to hidden; JS will show it if iOS -->
+            <button id="top-back-btn" class="back-btn" style="display: none;">&lt;</button>
+            <div class="header-title">
+                <img src="https://mcusercontent.com/4ceda90aa48260f0c3c397068/images/3089e9cb-945f-b383-b957-d5175b3d8c39.png" alt="Tbay" class="tbay-logo">
+                TOP TRADERS &middot; JULY
             </div>
-
-            <!-- Hero Text -->
-            <h1 class="text-[38px] font-black leading-[1.1] mb-4 tracking-tight">
-                Thank you for<br>trading with us
-            </h1>
-            <p class="text-gray-300 text-[15px] leading-relaxed font-medium max-w-[90%]">
-                You were among Tbay's top traders in July. This code is our way of thanking you for the volume, the trust, and the time you gave the platform. Claim it up to three times.
-            </p>
+            <div class="claims-badge">1 CODE &middot; 3 CLAIMS</div>
         </div>
 
-        <!-- Alert Banner -->
-        <div class="bg-tbayCyanLight px-6 py-4 flex gap-3 items-start border-b border-cyan-100">
-            <div class="bg-tbayCyan text-tbayDark rounded-full w-[22px] h-[22px] flex items-center justify-center font-black text-[13px] shrink-0 mt-0.5">
-                !
-            </div>
-            <p class="text-tbayDark text-[14px] font-bold leading-snug">
-                This code is tied to your account only. It cannot be shared or used by anyone else.
-            </p>
+        <h1 class="hero-title">Thank you for trading with us</h1>
+        <p class="hero-text">You were among Tbay's top traders in July. This code is our way of thanking you for the volume, the trust, and the time you gave the platform. Claim it up to three times.</p>
+    </div>
+
+    <div class="warning-banner">
+        <div class="warning-icon">!</div>
+        This code is tied to your account only. It cannot be shared or used by anyone else.
+    </div>
+
+    <div class="content-section">
+        <div class="section-header">
+            <span>YOUR REWARD CODE</span>
+            <span style="color: #546e7a; font-weight: normal;">3% &middot; up to 3 claims</span>
         </div>
 
-        <!-- Reward Code Section -->
-        <div class="px-6 py-8 bg-white">
-            <div class="flex justify-between items-end mb-4">
-                <h2 class="text-tbayDark text-xs font-black tracking-widest uppercase">Your Reward Code</h2>
-                <span class="text-textMuted text-xs font-semibold">3% · up to 3 claims</span>
+        <div class="reward-card">
+            <div class="card-top">
+                <div>
+                    <div class="rate-up-val">3%</div>
+                    <div class="rate-up-label">RATE-UP</div>
+                </div>
+                <div class="card-top-desc">
+                    <h4>CLAIM UP TO 3 TIMES</h4>
+                    <p>Each claim credits a separate 3% coupon to your Coupons page.</p>
+                </div>
             </div>
-
-            <!-- The Card -->
-            <div class="rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
-                <!-- Card Top (Dark) -->
-                <div class="bg-tbayDarkSecondary p-6 flex items-center gap-5">
-                    <div class="flex flex-col">
-                        <span class="text-tbayCyan text-[42px] font-black leading-none tracking-tighter">3%</span>
-                        <span class="text-tbayCyan text-[11px] font-black tracking-widest uppercase mt-1">RATE-UP</span>
-                    </div>
-                    <div class="border-l border-white/20 pl-5">
-                        <div class="text-tbayCyan text-[10px] font-bold tracking-widest uppercase mb-1">CLAIM UP TO 3 TIMES</div>
-                        <p class="text-white text-[13px] leading-snug font-medium opacity-90">
-                            Each claim credits a separate 3% coupon to your Coupons page.
-                        </p>
-                    </div>
+            <div class="card-bottom">
+                <div class="copy-box">
+                    <div class="code-display" id="coupon-code">TbayElite</div>
+                    <button class="copy-btn" id="copy-btn" onclick="copyCode()">Copy</button>
                 </div>
-
-                <!-- Card Bottom (White) -->
-                <div class="p-6 bg-white">
-                    <div class="coupon-dashed p-1 flex gap-3 mb-4 bg-gray-50/50">
-                        <div class="flex-grow flex items-center justify-center bg-gray-50 rounded-lg">
-                            <span id="couponCode" class="text-tbayDark text-[22px] font-black tracking-[0.2em] ml-2">TbayElite</span>
-                        </div>
-                        <button id="copyBtn" onclick="copyCode()" class="bg-tbayCyan text-tbayDark font-bold text-[15px] px-6 py-4 rounded-xl active:scale-95 transition-transform shrink-0">
-                            Copy
-                        </button>
-                    </div>
-                    <p class="text-textMuted text-xs font-medium leading-relaxed">
-                        Every coupon is valid for 14 days from the date you claim it.
-                    </p>
-                </div>
+                <p class="card-bottom-text">Every coupon is valid for 14 days from the date you claim it.</p>
             </div>
         </div>
 
-        <!-- Divider -->
-        <div class="h-2 w-full bg-gray-50 border-y border-gray-100"></div>
-
-        <!-- How to Redeem Section -->
-        <div class="px-6 py-8 bg-white flex-grow">
-            <h2 class="text-tbayDark text-xs font-black tracking-widest uppercase mb-6">How to Redeem</h2>
-            
-            <div class="space-y-5 mb-8">
-                <div class="flex items-start gap-4">
-                    <div class="w-7 h-7 rounded-full bg-tbayCyan text-tbayDark flex items-center justify-center font-black text-sm shrink-0 mt-0.5">1</div>
-                    <p class="text-textMain text-[15px] font-medium pt-1">Copy your code from this page.</p>
-                </div>
-                <div class="flex items-start gap-4">
-                    <div class="w-7 h-7 rounded-full bg-tbayCyan text-tbayDark flex items-center justify-center font-black text-sm shrink-0 mt-0.5">2</div>
-                    <p class="text-textMain text-[15px] font-medium pt-1">In the Tbay app, open Bonus Coupons page.</p>
-                </div>
-                <div class="flex items-start gap-4">
-                    <div class="w-7 h-7 rounded-full bg-tbayCyan text-tbayDark flex items-center justify-center font-black text-sm shrink-0 mt-0.5">3</div>
-                    <p class="text-textMain text-[15px] font-medium pt-1">Paste the code on the box, and redeem.</p>
-                </div>
-                <div class="flex items-start gap-4">
-                    <div class="w-7 h-7 rounded-full bg-tbayCyan text-tbayDark flex items-center justify-center font-black text-sm shrink-0 mt-0.5">4</div>
-                    <p class="text-textMain text-[15px] font-medium pt-1 leading-relaxed">The 3% coupon lands on your Coupons page and stays valid for 14 days. Repeat up to three times.</p>
-                </div>
-            </div>
-
-            <!-- Info Box -->
-            <div class="bg-gray-100/80 rounded-2xl p-5 border border-gray-200/60">
-                <h3 class="text-textMuted text-[11px] font-bold tracking-widest uppercase mb-2">GOOD TO KNOW</h3>
-                <p class="text-textMuted text-[13px] leading-relaxed font-medium">
-                    The code can be claimed three times in total, and only on the account it was issued to. It cannot be shared, transferred, or exchanged for cash. Each claim gives a 3% rate-up coupon valid for 14 days from the moment you claim it.
-                </p>
-            </div>
+        <div class="section-header">
+            <span>HOW TO REDEEM</span>
         </div>
 
-        <!-- Footer CTA -->
-        <div class="bg-tbayDark px-6 py-8 pb-[max(32px,env(safe-area-inset-bottom))] text-center mt-auto">
-            <h2 class="text-white text-[24px] font-black leading-tight mb-6">
-                See you on the August<br>leaderboard.
-            </h2>
-            <button id="mainCtaBtn" onclick="routeAction()" class="w-full bg-tbayCyan text-tbayDark text-[16px] font-extrabold py-4 rounded-xl active:scale-[0.98] transition-transform">
-                Open the Tbay app
-            </button>
-        </div>
+        <ul class="steps-list">
+            <li class="step-item">
+                <div class="step-number">1</div>
+                <div>Copy your code from this page.</div>
+            </li>
+            <li class="step-item">
+                <div class="step-number">2</div>
+                <div>In the Tbay app, open Account, then Coupons.</div>
+            </li>
+            <li class="step-item">
+                <div class="step-number">3</div>
+                <div>Tap Redeem code, paste it, and confirm.</div>
+            </li>
+            <li class="step-item">
+                <div class="step-number">4</div>
+                <div>The 3% coupon lands on your Coupons page and stays valid for 14 days. Repeat up to three times.</div>
+            </li>
+        </ul>
 
+        <div class="good-to-know">
+            <h4>GOOD TO KNOW</h4>
+            <p>The code can be claimed three times in total, and only on the account it was issued to. It cannot be shared, transferred, or exchanged for cash. Each claim gives a 3% rate-up coupon valid for 14 days from the moment you claim it.</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <h2>See you on the August leaderboard.</h2>
+        <button id="bottom-action-btn" class="main-cta">Loading...</button>
     </div>
 
     <script>
-        // --- OS Detection & Logic ---
-        let isIOS = false;
+        // ----------------------------------------------------
+        // 1. DEVICE DETECTION & UI INITIALIZATION
+        // ----------------------------------------------------
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+        
+        const topBackBtn = document.getElementById('top-back-btn');
+        const bottomActionBtn = document.getElementById('bottom-action-btn');
 
-        document.addEventListener("DOMContentLoaded", () => {
-            const ua = navigator.userAgent || navigator.vendor || window.opera;
-            // Check for iOS devices
-            isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
-
-            const backBtn = document.getElementById('headerBackBtn');
-            const titleWrapper = document.getElementById('headerTitleWrapper');
-            const ctaBtn = document.getElementById('mainCtaBtn');
-
-            if (isIOS) {
-                // Show back button, adjust header spacing, change CTA text
-                backBtn.classList.remove('hidden');
-                backBtn.classList.add('flex');
-                titleWrapper.classList.remove('justify-start');
-                titleWrapper.classList.add('justify-center');
-                titleWrapper.classList.add('-ml-6'); // Offset to keep it centered despite back button
-                
-                ctaBtn.innerText = "Back to home";
-            } else {
-                // Keep back button hidden, keep default CTA text
-                ctaBtn.innerText = "Open the Tbay app";
-            }
+        // Setup the buttons based on the device
+        if (isIOS) {
+            topBackBtn.style.display = 'block';
+            bottomActionBtn.innerText = 'Back to home';
             
-            // Trigger tracking silently in the background
-            trackUserVisit();
-        });
-
-        // --- Tracking Logic ---
-        const TRACKING_URL = "https://script.google.com/macros/s/AKfycby12T3nLkd3Qt_YPdnG-JYrs-GPZznIEp9oo-lxv5oAjkvYmS53Y9hakwFC4WstRHH_SA/exec"; 
-
-        function trackUserVisit() {
-            try {
-                // 1. Check local storage for existing data
-                let userId = localStorage.getItem('tbay_elite_uid');
-                let firstOpenTime = localStorage.getItem('tbay_elite_first_open');
-                let openCount = parseInt(localStorage.getItem('tbay_elite_open_count') || '0', 10);
-                
-                // 2. If completely new user, generate persistent ID and First Open time
-                if (!userId) {
-                    // Generates a highly unique string (e.g., usr_17b..._z9x)
-                    userId = 'usr_' + Date.now().toString(36) + '_' + Math.random().toString(36).substr(2, 9);
-                    firstOpenTime = new Date().toISOString();
-                    
-                    localStorage.setItem('tbay_elite_uid', userId);
-                    localStorage.setItem('tbay_elite_first_open', firstOpenTime);
-                }
-                
-                // 3. Increment opens and save
-                openCount++;
-                localStorage.setItem('tbay_elite_open_count', openCount.toString());
-                
-                // 4. Capture timezone
-                const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Unknown";
-                
-                // 5. Send payload to Google Sheets
-                const payload = {
-                    userId: userId,
-                    firstOpenTime: firstOpenTime,
-                    timezone: timezone,
-                    openCount: openCount
-                };
-                
-                // We use 'text/plain' to easily bypass CORS restrictions on cross-domain fetch requests
-                if (TRACKING_URL && !TRACKING_URL.includes("YOUR_GOOGLE_APPS")) {
-                    fetch(TRACKING_URL, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'text/plain' },
-                        body: JSON.stringify(payload)
-                    }).catch(error => {
-                        // Fail silently so the user experience is never interrupted
-                        console.error("Tracking ping failed", error);
-                    });
-                }
-            } catch (error) {
-                console.error("Local storage access error", error);
-            }
-        }
-
-        // --- Routing Function ---
-        function routeAction() {
-            if (isIOS) {
-                // Native closing behavior for iOS webview / app bridge
-                if (window.history.length > 1) {
+            // Reusable back function for iOS
+            const goBack = function() {
+                if (window.WebViewJavascriptBridge) {
+                    // Custom App Bridge fallback if you have one
+                    window.WebViewJavascriptBridge.callHandler('closeWebView', null, null);
+                } else {
                     window.history.back();
-                } else {
-                    window.location.href = "https://tbay.store"; // Safe fallback
                 }
-            } else {
-                // Redirect to deep link for Android/Other
-                window.location.href = "https://tbay.go.link/6pkFV";
-            }
+            };
+            
+            topBackBtn.onclick = goBack;
+            bottomActionBtn.onclick = goBack;
+
+        } else {
+            topBackBtn.style.display = 'none';
+            bottomActionBtn.innerText = 'Take me to App';
+            
+            bottomActionBtn.onclick = function() {
+                window.location.href = 'https://tbay.go.link/6pkFV';
+            };
         }
 
-        // --- Copy Logic ---
+        // Display the website now that the buttons are configured
+        document.body.style.display = 'block';
+
+
+        // ----------------------------------------------------
+        // 2. COPY TO CLIPBOARD LOGIC
+        // ----------------------------------------------------
         function copyCode() {
-            const code = document.getElementById('couponCode').innerText;
-            const btn = document.getElementById('copyBtn');
-            const originalText = btn.innerText;
+            var codeText = document.getElementById("coupon-code").innerText;
+            var copyBtn = document.getElementById("copy-btn");
 
-            function showSuccess() {
-                btn.innerText = "Copied!";
-                btn.classList.add('bg-green-400', 'text-tbayDark');
-                btn.classList.remove('bg-tbayCyan');
-                setTimeout(() => {
-                    btn.innerText = originalText;
-                    btn.classList.remove('bg-green-400', 'text-tbayDark');
-                    btn.classList.add('bg-tbayCyan');
-                }, 2000);
-            }
-
-            // Using document.execCommand for maximum compatibility inside iframes and app webviews
-            let textArea = document.createElement("textarea");
-            textArea.value = code;
-            
-            // Prevent scrolling to the bottom of the page when focusing
+            // Create temporary textarea for maximum compatibility
+            var textArea = document.createElement("textarea");
+            textArea.value = codeText;
             textArea.style.position = "fixed"; 
-            textArea.style.left = "-999999px";
-            textArea.style.top = "0";
-            
+            textArea.style.top = "-9999px";
             document.body.appendChild(textArea);
-            textArea.focus(); 
+            textArea.focus();
             textArea.select();
-            
-            try { 
-                let successful = document.execCommand('copy'); 
-                if (successful) {
-                    showSuccess(); 
-                } else {
-                    console.error('Copy command was unsuccessful');
-                }
+
+            try {
+                document.execCommand('copy');
+                copyBtn.innerText = "Copied!";
+                copyBtn.classList.add("success");
+                
+                setTimeout(function() {
+                    copyBtn.innerText = "Copy";
+                    copyBtn.classList.remove("success");
+                }, 2000);
             } catch (err) {
-                console.error('Failed to copy', err);
+                console.error("Fallback copy failed", err);
             }
-            
+
             document.body.removeChild(textArea);
         }
+
+        // ----------------------------------------------------
+        // 3. TRACKING LOGIC (GOOGLE SHEETS)
+        // ----------------------------------------------------
+        // 🚨 REPLACE THIS WITH YOUR NEW WEB APP URL 🚨
+        const TRACKING_URL = "https://script.google.com/macros/s/AKfycbxpVzSZ7CRsOSfMxfr46bTusV0qq4wmtZO2x11Gg2C--tquvFfYuWFojQjyssjS2X3ADQ/exec";
+
+        function generateUUID() {
+            return 'xxxx-xxxx-4xxx-yxxx-xxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
+
+        function trackUserVisit() {
+            // Check for existing ID in local storage
+            let userId = localStorage.getItem("tbay_top_traders_uuid");
+            if (!userId) {
+                userId = generateUUID();
+                localStorage.setItem("tbay_top_traders_uuid", userId);
+            }
+
+            // Gather Data
+            const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            const deviceDetails = encodeURIComponent(navigator.userAgent);
+
+            // Construct the final URL with parameters
+            const requestUrl = TRACKING_URL + "?userId=" + userId + "&timezone=" + timezone + "&deviceDetails=" + deviceDetails;
+
+            // Send GET request quietly in the background
+            fetch(requestUrl, {
+                method: 'GET',
+                mode: 'no-cors' // Bypasses CORS errors in the browser silently
+            }).then(() => {
+                console.log("Visit tracked successfully.");
+            }).catch((err) => {
+                console.error("Tracking error:", err);
+            });
+        }
+
+        // Fire tracking once the script loads
+        trackUserVisit();
     </script>
 </body>
 </html>
