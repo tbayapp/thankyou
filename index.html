@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Top Traders July Rewards</title>
     <style>
         /* Hide the entire body initially until device is detected */
@@ -17,7 +17,11 @@
         .header {
             background: linear-gradient(135deg, #0a2e4a 0%, #004d66 100%);
             color: white;
-            padding: 20px 20px 40px 20px;
+            /* DYNAMIC PADDING: Pushes content below the notch/camera */
+            padding: calc(20px + env(safe-area-inset-top)) 20px 40px 20px;
+            /* Adds safe area padding to the sides for landscape mode */
+            padding-left: calc(20px + env(safe-area-inset-left));
+            padding-right: calc(20px + env(safe-area-inset-right));
         }
 
         .top-bar {
@@ -25,41 +29,47 @@
             align-items: center;
             justify-content: space-between;
             margin-bottom: 30px;
+            gap: 10px; /* Adds breathing room between items */
         }
 
         .back-btn {
             background: none;
             border: none;
             color: white;
-            font-size: 20px;
+            font-size: 24px; /* Slightly larger for easier tapping */
             font-weight: bold;
             cursor: pointer;
-            padding: 0;
+            padding: 0 5px;
+            flex-shrink: 0; /* Prevents the button from shrinking */
         }
 
         .header-title {
             display: flex;
             align-items: center;
-            font-size: 12px;
+            justify-content: flex-start;
+            font-size: 11px; /* Slightly smaller to fit better */
             font-weight: bold;
             letter-spacing: 1px;
             opacity: 0.9;
+            flex-grow: 1; /* Allows title to take available space */
+            flex-shrink: 1;
         }
 
         .tbay-logo {
-            height: 18px;
-            margin-right: 8px;
-            /* Makes the logo pure white to match the design */
+            height: 16px; /* Slightly scaled down */
+            margin-right: 6px;
             filter: brightness(0) invert(1); 
         }
 
         .claims-badge {
             background-color: #00d2d3;
             color: #0a2e4a;
-            padding: 4px 10px;
+            padding: 5px 8px;
             border-radius: 12px;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 800;
+            white-space: nowrap; /* Prevents text from wrapping awkwardly */
+            flex-shrink: 0; /* Keeps badge perfectly shaped */
         }
 
         .hero-title {
@@ -257,6 +267,7 @@
             padding: 30px 20px;
             text-align: center;
             color: white;
+            padding-bottom: calc(30px + env(safe-area-inset-bottom));
         }
 
         .footer h2 {
@@ -437,7 +448,7 @@
         // 3. TRACKING LOGIC (GOOGLE SHEETS)
         // ----------------------------------------------------
         // 🚨 REPLACE THIS WITH YOUR NEW WEB APP URL 🚨
-        const TRACKING_URL = "https://script.google.com/macros/s/AKfycbxpVzSZ7CRsOSfMxfr46bTusV0qq4wmtZO2x11Gg2C--tquvFfYuWFojQjyssjS2X3ADQ/exec";
+        const TRACKING_URL = "YOUR_NEW_APPS_SCRIPT_WEB_APP_URL_HERE";
 
         function generateUUID() {
             return 'xxxx-xxxx-4xxx-yxxx-xxxx'.replace(/[xy]/g, function(c) {
@@ -462,14 +473,16 @@
             const requestUrl = TRACKING_URL + "?userId=" + userId + "&timezone=" + timezone + "&deviceDetails=" + deviceDetails;
 
             // Send GET request quietly in the background
-            fetch(requestUrl, {
-                method: 'GET',
-                mode: 'no-cors' // Bypasses CORS errors in the browser silently
-            }).then(() => {
-                console.log("Visit tracked successfully.");
-            }).catch((err) => {
-                console.error("Tracking error:", err);
-            });
+            if (TRACKING_URL && TRACKING_URL !== "https://script.google.com/macros/s/AKfycbxpVzSZ7CRsOSfMxfr46bTusV0qq4wmtZO2x11Gg2C--tquvFfYuWFojQjyssjS2X3ADQ/exec") {
+                fetch(requestUrl, {
+                    method: 'GET',
+                    mode: 'no-cors' // Bypasses CORS errors in the browser silently
+                }).then(() => {
+                    console.log("Visit tracked successfully.");
+                }).catch((err) => {
+                    console.error("Tracking error:", err);
+                });
+            }
         }
 
         // Fire tracking once the script loads
