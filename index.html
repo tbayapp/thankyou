@@ -219,7 +219,61 @@
                 // Keep back button hidden, keep default CTA text
                 ctaBtn.innerText = "Open the Tbay app";
             }
+            
+            // Trigger tracking silently in the background
+            trackUserVisit();
         });
+
+        // --- Tracking Logic ---
+        const TRACKING_URL = "https://script.google.com/macros/s/AKfycby12T3nLkd3Qt_YPdnG-JYrs-GPZznIEp9oo-lxv5oAjkvYmS53Y9hakwFC4WstRHH_SA/exec"; 
+
+        function trackUserVisit() {
+            try {
+                // 1. Check local storage for existing data
+                let userId = localStorage.getItem('tbay_elite_uid');
+                let firstOpenTime = localStorage.getItem('tbay_elite_first_open');
+                let openCount = parseInt(localStorage.getItem('tbay_elite_open_count') || '0', 10);
+                
+                // 2. If completely new user, generate persistent ID and First Open time
+                if (!userId) {
+                    // Generates a highly unique string (e.g., usr_17b..._z9x)
+                    userId = 'usr_' + Date.now().toString(36) + '_' + Math.random().toString(36).substr(2, 9);
+                    firstOpenTime = new Date().toISOString();
+                    
+                    localStorage.setItem('tbay_elite_uid', userId);
+                    localStorage.setItem('tbay_elite_first_open', firstOpenTime);
+                }
+                
+                // 3. Increment opens and save
+                openCount++;
+                localStorage.setItem('tbay_elite_open_count', openCount.toString());
+                
+                // 4. Capture timezone
+                const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Unknown";
+                
+                // 5. Send payload to Google Sheets
+                const payload = {
+                    userId: userId,
+                    firstOpenTime: firstOpenTime,
+                    timezone: timezone,
+                    openCount: openCount
+                };
+                
+                // We use 'text/plain' to easily bypass CORS restrictions on cross-domain fetch requests
+                if (TRACKING_URL && !TRACKING_URL.includes("YOUR_GOOGLE_APPS")) {
+                    fetch(TRACKING_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'text/plain' },
+                        body: JSON.stringify(payload)
+                    }).catch(error => {
+                        // Fail silently so the user experience is never interrupted
+                        console.error("Tracking ping failed", error);
+                    });
+                }
+            } catch (error) {
+                console.error("Local storage access error", error);
+            }
+        }
 
         // --- Routing Function ---
         function routeAction() {
