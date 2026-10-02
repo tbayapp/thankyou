@@ -1,517 +1,195 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Top Traders September Rewards</title>
-    <style>
-        /* Hide the entire body initially until device is detected */
-        body {
-            display: none;
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f4f6f8;
-            color: #1a2a3a;
-        }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tbay · September Top Traders</title>
+<meta name="description" content="Thank you for trading with Tbay. September's Top Traders get an exclusive 3% coupon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#003152; --navy-2:#00243d; --teal:#00CCCC; --teal-ink:#00666b; --teal-soft:#e0f5f5;
+    --gold:#FFC233; --gold-dark:#E09E00; --ink:#003152; --ink-2:#2c5470; --bg:#f3fbfb; --card:#ffffff; --line:#d7ecee;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{font-family:"Poppins",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+  .wrap{max-width:520px;margin:0 auto;padding:0 16px 40px}
 
-        .header {
-            background: linear-gradient(135deg, #0a2e4a 0%, #004d66 100%);
-            color: white;
-            /* DYNAMIC PADDING: Increased to 36px base to heavily push down below notches/dots */
-            padding: calc(36px + env(safe-area-inset-top)) 24px 40px 24px;
-            /* Adds safe area padding to the sides for landscape mode */
-            padding-left: calc(24px + env(safe-area-inset-left));
-            padding-right: calc(24px + env(safe-area-inset-right));
-        }
+  /* hero */
+  .hero{position:relative;overflow:hidden;color:#fff;padding:28px 20px 96px;border-radius:0 0 28px 28px;
+        background:radial-gradient(320px 240px at 90% 100%,rgba(255,194,51,.28),transparent 70%),
+                   radial-gradient(340px 240px at 100% 0,rgba(0,204,204,.28),transparent 70%),
+                   linear-gradient(140deg,var(--navy-2) 0%,var(--navy) 55%,#00465e 100%)}
+  .hero .rays{position:absolute;right:-220px;bottom:-260px;width:620px;height:620px;opacity:.10;border-radius:50%;
+        background:repeating-conic-gradient(from 0deg,var(--gold) 0 6deg,transparent 6deg 18deg);
+        -webkit-mask-image:radial-gradient(circle,#000 20%,transparent 62%);mask-image:radial-gradient(circle,#000 20%,transparent 62%)}
+  .hero-in{position:relative;max-width:520px;margin:0 auto}
+  .pill{display:inline-flex;align-items:center;gap:7px;background:var(--gold);color:var(--navy);font-weight:700;font-size:12px;letter-spacing:2.2px;
+        padding:5px 13px;border-radius:999px}
+  .pill svg{width:13px;height:13px}
+  .hero h1{max-width:calc(100% - 64px);font-size:31px;line-height:1.12;letter-spacing:-.6px;margin-top:14px;font-weight:700}
+  .hero h1 span{color:var(--gold)}
+  .hero p{color:#d6e7ef;font-size:15.5px;margin-top:10px;max-width:420px}
+  .trophy{position:absolute;right:0;top:34px;width:60px;height:64px;filter:drop-shadow(0 10px 18px rgba(0,0,0,.35))}
+  .cf{position:absolute;border-radius:2px}
 
-        .top-bar {
-            display: flex;
-            align-items: center;
-            margin-bottom: 32px;
-            min-height: 44px; /* Minimum Apple touch target height for easy tapping */
-            position: relative;
-        }
+  /* reward card */
+  .reward{position:relative;margin:-72px 0 0;background:var(--card);border-radius:22px;box-shadow:0 18px 40px rgba(0,49,82,.16);overflow:hidden}
+  .r-top{display:flex;align-items:center;gap:16px;padding:20px 20px 18px}
+  .pct{flex:none;width:92px;height:92px;border-radius:20px;background:linear-gradient(160deg,#FFD66B,#FFB300);display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--navy)}
+  .pct b{font-size:34px;line-height:1;font-weight:700;letter-spacing:-1px}
+  .pct small{font-size:11px;font-weight:600;letter-spacing:1.5px;margin-top:3px}
+  .r-top h2{font-size:19px;line-height:1.25}
+  .r-top .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .chip{font-size:12px;font-weight:600;color:var(--teal-ink);background:var(--teal-soft);border-radius:999px;padding:3px 10px}
+  .perf{position:relative;height:0;border-top:2px dashed var(--line);margin:0 18px}
+  .perf:before,.perf:after{content:"";position:absolute;top:-12px;width:22px;height:22px;border-radius:50%;background:var(--bg)}
+  .perf:before{left:-30px}.perf:after{right:-30px}
+  .r-code{padding:18px 20px 20px}
+  .r-code label{display:block;font-size:12px;font-weight:600;letter-spacing:2px;color:var(--ink-2);margin-bottom:8px}
+  .codebox{display:flex;align-items:center;gap:10px;border:2px dashed var(--teal);background:#f6fdfd;border-radius:14px;padding:8px 8px 8px 16px}
+  .codebox code{flex:1;font-family:inherit;font-size:22px;font-weight:700;letter-spacing:4px;color:var(--navy)}
+  .copy{appearance:none;border:0;cursor:pointer;font:inherit;font-weight:700;font-size:15px;background:var(--navy);color:#fff;border-radius:999px;padding:10px 20px;
+        display:inline-flex;align-items:center;gap:8px;transition:background .2s,transform .1s;min-height:44px}
+  .copy:active{transform:scale(.97)}
+  .copy svg{width:16px;height:16px;color:var(--teal)}
+  .copy.done{background:var(--teal);color:var(--navy)}
+  .copy.done svg{color:var(--navy)}
+  .hint{font-size:13px;color:var(--ink-2);margin-top:10px}
 
-        .back-btn {
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            width: 44px; 
-            height: 44px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            transition: background 0.2s;
-            backdrop-filter: blur(4px);
-            padding: 0;
-        }
-        
-        .back-btn:active {
-            background: rgba(255, 255, 255, 0.3);
-        }
+  /* sections */
+  section{margin-top:28px}
+  .eyebrow{font-size:12px;font-weight:600;letter-spacing:2.2px;color:var(--teal-ink)}
+  section h3{font-size:21px;line-height:1.25;margin-top:4px}
+  .steps{list-style:none;margin-top:14px;position:relative}
+  .steps:before{content:"";position:absolute;left:17px;top:20px;bottom:20px;border-left:2px dashed #9fdede}
+  .steps li{position:relative;display:flex;gap:14px;align-items:flex-start;padding:10px 0}
+  .num{flex:none;width:36px;height:36px;border-radius:50%;background:var(--navy);color:var(--teal);font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px var(--bg)}
+  .steps .st{display:block;font-size:15.5px;font-weight:700}
+  .steps .sd{display:block;font-size:14px;color:var(--ink-2)}
+  .steps .sd b{color:var(--ink)}
+  .path{display:inline-block;font-weight:600;color:var(--navy);background:var(--teal-soft);border-radius:6px;padding:0 6px}
 
-        .tbay-logo {
-            height: 28px; /* Increased for standard logo sizing */
-            filter: brightness(0) invert(1); 
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-        }
+  .terms{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:6px 16px}
+  .terms li{list-style:none;display:flex;gap:12px;align-items:flex-start;padding:12px 0;font-size:14.5px;color:var(--ink-2);border-bottom:1px solid #eef6f7}
+  .terms li:last-child{border-bottom:0}
+  .terms .ic{flex:none;width:28px;height:28px;border-radius:9px;background:var(--teal-soft);display:flex;align-items:center;justify-content:center;margin-top:1px}
+  .terms .ic svg{width:15px;height:15px}
+  .terms b{color:var(--ink)}
 
-        .header-badges {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 16px;
-            flex-wrap: wrap;
-        }
+  .closing{margin-top:30px;text-align:center;background:var(--navy);color:#fff;border-radius:22px;padding:26px 20px;position:relative;overflow:hidden}
+  .closing:before{content:"";position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(0,204,204,.35),transparent 70%)}
+  .closing h3{position:relative;font-size:22px}
+  .closing h3 span{color:var(--teal)}
+  .closing p{position:relative;font-size:14.5px;color:#cfe6ee;margin-top:6px}
+  footer{text-align:center;font-size:12.5px;color:var(--ink-2);margin-top:22px}
 
-        .badge {
-            background-color: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 10px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            white-space: nowrap;
-        }
+  .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;background:var(--navy);color:#fff;font-size:14px;font-weight:600;
+         padding:10px 18px;border-radius:999px;box-shadow:0 10px 26px rgba(0,49,82,.3);transition:.25s;pointer-events:none}
+  .toast.show{opacity:1;transform:translate(-50%,0)}
 
-        .badge.highlight {
-            background-color: #00d2d3;
-            color: #0a2e4a;
-            border-color: #00d2d3;
-        }
-
-        .hero-title {
-            font-size: 36px;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 16px;
-            letter-spacing: -0.5px;
-            margin-top: 0;
-        }
-
-        .hero-text {
-            font-size: 15px;
-            line-height: 1.6;
-            opacity: 0.9;
-            margin: 0;
-        }
-
-        .warning-banner {
-            background-color: #e0f7fa;
-            color: #004d40;
-            padding: 15px 20px;
-            font-size: 12px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-        }
-
-        .warning-icon {
-            background-color: #00d2d3;
-            color: white;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            flex-shrink: 0;
-            font-weight: bold;
-        }
-
-        .content-section {
-            padding: 20px;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            font-size: 12px;
-            font-weight: bold;
-            color: #0a2e4a;
-            margin-bottom: 15px;
-            letter-spacing: 0.5px;
-        }
-
-        .reward-card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            overflow: hidden;
-            margin-bottom: 30px;
-        }
-
-        .card-top {
-            background-color: #0a2e4a;
-            color: white;
-            display: flex;
-            padding: 20px;
-        }
-
-        .rate-up-val {
-            font-size: 42px;
-            font-weight: 900;
-            color: #00d2d3;
-            line-height: 1;
-            margin-right: 20px;
-        }
-
-        .rate-up-label {
-            font-size: 10px;
-            letter-spacing: 1px;
-            margin-top: 5px;
-        }
-
-        .card-top-desc h4 {
-            margin: 0 0 5px 0;
-            font-size: 10px;
-            color: #00d2d3;
-            letter-spacing: 1px;
-        }
-
-        .card-top-desc p {
-            margin: 0;
-            font-size: 12px;
-            line-height: 1.4;
-            opacity: 0.9;
-        }
-
-        .card-bottom {
-            padding: 20px;
-        }
-
-        .copy-box {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 12px;
-        }
-
-        .code-display {
-            flex-grow: 1;
-            background: #f4f6f8;
-            border: 1px dashed #cfd8dc;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            font-weight: 800;
-            color: #0a2e4a;
-            letter-spacing: 2px;
-        }
-
-        .copy-btn {
-            background-color: #00d2d3;
-            color: #0a2e4a;
-            border: none;
-            border-radius: 6px;
-            padding: 0 20px;
-            font-weight: bold;
-            font-size: 14px;
-            cursor: pointer;
-        }
-        
-        .copy-btn.success {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        .card-bottom-text {
-            font-size: 11px;
-            color: #546e7a;
-            margin: 0;
-        }
-
-        .steps-list {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 30px 0;
-        }
-
-        .step-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 15px;
-            font-size: 13px;
-            line-height: 1.5;
-            color: #1a2a3a;
-        }
-
-        .step-number {
-            background-color: #00d2d3;
-            color: #0a2e4a;
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 12px;
-            margin-right: 12px;
-            flex-shrink: 0;
-        }
-
-        .good-to-know {
-            background-color: #eceff1;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-        }
-
-        .good-to-know h4 {
-            margin: 0 0 10px 0;
-            font-size: 11px;
-            color: #546e7a;
-            letter-spacing: 1px;
-        }
-
-        .good-to-know p {
-            margin: 0;
-            font-size: 12px;
-            color: #546e7a;
-            line-height: 1.5;
-        }
-
-        .footer {
-            background-color: #0a2e4a;
-            padding: 30px 20px;
-            text-align: center;
-            color: white;
-            padding-bottom: calc(30px + env(safe-area-inset-bottom));
-        }
-
-        .footer h2 {
-            font-size: 24px;
-            margin: 0 0 20px 0;
-            text-align: left;
-        }
-
-        .main-cta {
-            background-color: #00d2d3;
-            color: #0a2e4a;
-            border: none;
-            border-radius: 8px;
-            width: 100%;
-            padding: 16px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-    </style>
+  @media (min-width:600px){ .hero{padding:40px 24px 104px} .hero h1{font-size:38px} .trophy{width:84px;height:90px;top:30px} .hero h1{max-width:calc(100% - 96px)} }
+  @media (prefers-reduced-motion:reduce){ *{transition:none!important} }
+</style>
 </head>
 <body>
 
-    <div class="header">
-        <div class="top-bar">
-            <!-- This button defaults to hidden; JS will show it if iOS -->
-            <button id="top-back-btn" class="back-btn" style="display: none;" aria-label="Go back">
-                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="15 18 9 12 15 6"></polyline>
-                </svg>
-            </button>
-            <img src="https://mcusercontent.com/4ceda90aa48260f0c3c397068/images/3089e9cb-945f-b383-b957-d5175b3d8c39.png" alt="Tbay" class="tbay-logo">
-        </div>
+<header class="hero">
+  <div class="rays" aria-hidden="true"></div>
+  <div class="hero-in">
+    <svg class="trophy" viewBox="0 0 64 68" aria-hidden="true">
+      <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#FFE08A"/><stop offset=".55" stop-color="#FFC233"/><stop offset="1" stop-color="#E09E00"/></linearGradient></defs>
+      <path d="M14 6h36v14c0 11-8 19-18 19S14 31 14 20z" fill="url(#g)"/>
+      <path d="M14 10H5v5c0 7 5 12 11 12M50 10h9v5c0 7-5 12-11 12" fill="none" stroke="#FFC233" stroke-width="4" stroke-linecap="round"/>
+      <rect x="28" y="38" width="8" height="12" fill="#E09E00"/><rect x="18" y="50" width="28" height="9" rx="3" fill="url(#g)"/>
+      <path d="M32 13l2.4 5 5.4.6-4 3.7 1.1 5.3L32 25l-4.9 2.6 1.1-5.3-4-3.7 5.4-.6z" fill="#fff" opacity=".9"/>
+    </svg>
+    <span class="cf" style="right:92px;top:8px;width:9px;height:4px;background:#FFC233;transform:rotate(30deg)"></span>
+    <span class="cf" style="right:20px;top:84px;width:10px;height:4px;background:#00CCCC;transform:rotate(-25deg)"></span>
+    <span class="cf" style="right:110px;top:60px;width:6px;height:6px;background:#fff;border-radius:50%;opacity:.8"></span>
 
-        <div class="header-badges">
-            <div class="badge">TOP TRADERS &middot; September</div>
-            <div class="badge highlight">1 CODE &middot; 3 CLAIMS</div>
-        </div>
+    <span class="pill"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17l-6.1 3.4 1.5-6.8L2.2 9l6.9-.7z"/></svg>SEPTEMBER TOP TRADERS</span>
+    <h1>Thank you for trading with us, <span>winner!</span></h1>
+    <p>You're one of Tbay's Top Traders for September. As a thank you, we've unlocked an exclusive coupon just for you.</p>
+  </div>
+</header>
 
-        <h1 class="hero-title">Thank you for trading with us</h1>
-        <p class="hero-text">You were among Tbay's top traders in September. This code is our way of thanking you for the volume, the trust, and the time you gave the platform. Claim it up to three times.</p>
+<main class="wrap">
+  <div class="reward">
+    <div class="r-top">
+      <div class="pct"><b>3%</b><small>COUPON</small></div>
+      <div>
+        <h2>Your Top Trader reward</h2>
+        <div class="meta"><span class="chip">Up to 3 claims</span><span class="chip">Valid 14 days per claim</span></div>
+      </div>
     </div>
-
-    <div class="warning-banner">
-        <div class="warning-icon">!</div>
-        This code is tied to your account only. It cannot be shared or used by anyone else.
+    <div class="perf" aria-hidden="true"></div>
+    <div class="r-code">
+      <label for="code">YOUR CODE</label>
+      <div class="codebox">
+        <code id="code">THANKYOU</code>
+        <button class="copy" id="copyBtn" type="button" aria-live="polite">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+          <span>Copy</span>
+        </button>
+      </div>
+      <p class="hint">One code, three claims. Each claim gives you a separate 3% coupon.</p>
     </div>
+  </div>
 
-    <div class="content-section">
-        <div class="section-header">
-            <span>YOUR REWARD CODE</span>
-            <span style="color: #546e7a; font-weight: normal;">3% &middot; up to 3 claims</span>
-        </div>
+  <section aria-labelledby="how">
+    <div class="eyebrow">HOW TO REDEEM</div>
+    <h3 id="how">Claim your coupon in 4 steps</h3>
+    <ol class="steps">
+      <li><div class="num">1</div><div><span class="st">Copy your code</span><span class="sd">Tap <b>Copy</b> above to copy THANKYOU.</span></div></li>
+      <li><div class="num">2</div><div><span class="st">Open your coupons</span><span class="sd">In the Tbay app, go to <span class="path">Account → Coupons</span>.</span></div></li>
+      <li><div class="num">3</div><div><span class="st">Redeem the code</span><span class="sd">Tap <b>Redeem code</b>, paste THANKYOU and confirm.</span></div></li>
+      <li><div class="num">4</div><div><span class="st">Use it, then repeat</span><span class="sd">Your coupon appears on the Coupons page. Redeem again for up to 3 coupons in total.</span></div></li>
+    </ol>
+  </section>
 
-        <div class="reward-card">
-            <div class="card-top">
-                <div>
-                    <div class="rate-up-val">3%</div>
-                    <div class="rate-up-label">RATE-UP</div>
-                </div>
-                <div class="card-top-desc">
-                    <h4>CLAIM UP TO 3 TIMES</h4>
-                    <p>Each claim credits a separate 3% coupon to your Coupons page.</p>
-                </div>
-            </div>
-            <div class="card-bottom">
-                <div class="copy-box">
-                    <div class="code-display" id="coupon-code">THANKYOU</div>
-                    <button class="copy-btn" id="copy-btn" onclick="copyCode()">Copy</button>
-                </div>
-                <p class="card-bottom-text">Every coupon is valid for 14 days from the date you claim it.</p>
-            </div>
-        </div>
+  <section aria-labelledby="gtk">
+    <div class="eyebrow">GOOD TO KNOW</div>
+    <h3 id="gtk">Reward terms</h3>
+    <ul class="terms">
+      <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#003152" stroke-width="2.4" stroke-linecap="round"><path d="M4 12h16M12 4v16"/></svg></span><span>The code can be claimed <b>up to 3 times</b> in total.</span></li>
+      <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#003152" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span><span>Exclusive to <b>your account</b>. It can't be transferred or shared.</span></li>
+      <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#003152" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M6 6l12 12"/></svg></span><span>Coupons <b>can't be exchanged for cash</b>.</span></li>
+      <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#003152" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span>Each coupon is valid for <b>14 days</b> from the date you claim it.</span></li>
+    </ul>
+  </section>
 
-        <div class="section-header">
-            <span>HOW TO REDEEM</span>
-        </div>
+  <div class="closing">
+    <h3>See you on the <span>October</span> leaderboard</h3>
+    <p>Keep trading to stay among Tbay's Top Traders next month.</p>
+  </div>
 
-        <ul class="steps-list">
-            <li class="step-item">
-                <div class="step-number">1</div>
-                <div>Copy your code from this page.</div>
-            </li>
-            <li class="step-item">
-                <div class="step-number">2</div>
-                <div>In the Tbay app, open Account, then Coupons.</div>
-            </li>
-            <li class="step-item">
-                <div class="step-number">3</div>
-                <div>Tap Redeem code, paste it, and confirm.</div>
-            </li>
-            <li class="step-item">
-                <div class="step-number">4</div>
-                <div>The 3% coupon lands on your Coupons page and stays valid for 14 days. Repeat up to three times.</div>
-            </li>
-        </ul>
+  <footer>© Tbay. Terms apply.</footer>
+</main>
 
-        <div class="good-to-know">
-            <h4>GOOD TO KNOW</h4>
-            <p>The code can be claimed three times in total, and only on the account it was issued to. It cannot be shared, transferred, or exchanged for cash. Each claim gives a 3% rate-up coupon valid for 14 days from the moment you claim it.</p>
-        </div>
-    </div>
+<div class="toast" id="toast" role="status">Code copied</div>
 
-    <div class="footer">
-        <h2>See you on the October leaderboard.</h2>
-        <button id="bottom-action-btn" class="main-cta">Loading...</button>
-    </div>
-
-    <script>
-        // ----------------------------------------------------
-        // 1. DEVICE DETECTION & UI INITIALIZATION
-        // ----------------------------------------------------
-        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-        const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
-        
-        const topBackBtn = document.getElementById('top-back-btn');
-        const bottomActionBtn = document.getElementById('bottom-action-btn');
-
-        // Setup the buttons based on the device
-        if (isIOS) {
-            topBackBtn.style.display = 'flex';
-            bottomActionBtn.innerText = 'Back to home';
-            
-            // Reusable back function for iOS
-            const goBack = function() {
-                if (window.WebViewJavascriptBridge) {
-                    // Custom App Bridge fallback if you have one
-                    window.WebViewJavascriptBridge.callHandler('closeWebView', null, null);
-                } else {
-                    window.history.back();
-                }
-            };
-            
-            topBackBtn.onclick = goBack;
-            bottomActionBtn.onclick = goBack;
-
-        } else {
-            topBackBtn.style.display = 'none';
-            bottomActionBtn.innerText = 'Take me to App';
-            
-            bottomActionBtn.onclick = function() {
-                window.location.href = 'https://tbay.go.link/6pkFV';
-            };
-        }
-
-        // Display the website now that the buttons are configured
-        document.body.style.display = 'block';
-
-
-        // ----------------------------------------------------
-        // 2. COPY TO CLIPBOARD LOGIC
-        // ----------------------------------------------------
-        function copyCode() {
-            var codeText = document.getElementById("coupon-code").innerText;
-            var copyBtn = document.getElementById("copy-btn");
-
-            // Create temporary textarea for maximum compatibility
-            var textArea = document.createElement("textarea");
-            textArea.value = codeText;
-            textArea.style.position = "fixed"; 
-            textArea.style.top = "-9999px";
-            document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
-
-            try {
-                document.execCommand('copy');
-                copyBtn.innerText = "Copied!";
-                copyBtn.classList.add("success");
-                
-                setTimeout(function() {
-                    copyBtn.innerText = "Copy";
-                    copyBtn.classList.remove("success");
-                }, 2000);
-            } catch (err) {
-                console.error("Fallback copy failed", err);
-            }
-
-            document.body.removeChild(textArea);
-        }
-
-        // ----------------------------------------------------
-        // 3. TRACKING LOGIC (GOOGLE SHEETS)
-        // ----------------------------------------------------
-        // 🚨 REPLACE THIS WITH YOUR NEW WEB APP URL 🚨
-        const TRACKING_URL = "https://script.google.com/macros/s/AKfycbyNgzEd5ug_UaShUZ2OBB0pa3Je63D9J6NSpuaXtgCcv1pvL6f_Q6f3zRUbmpQck-kIDA/exec";
-
-        function generateUUID() {
-            return 'xxxx-xxxx-4xxx-yxxx-xxxx'.replace(/[xy]/g, function(c) {
-                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-                return v.toString(16);
-            });
-        }
-
-        function trackUserVisit() {
-            // Check for existing ID in local storage
-            let userId = localStorage.getItem("tbay_top_traders_uuid");
-            if (!userId) {
-                userId = generateUUID();
-                localStorage.setItem("tbay_top_traders_uuid", userId);
-            }
-
-            // Gather Data
-            const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-            const deviceDetails = encodeURIComponent(navigator.userAgent);
-
-            // Construct the final URL with parameters exactly as expected by your Code.gs script
-            const requestUrl = TRACKING_URL + "?userId=" + userId + "&timezone=" + timezone + "&deviceDetails=" + deviceDetails;
-
-            // Send GET request quietly in the background
-            if (TRACKING_URL && TRACKING_URL !== "https://script.google.com/macros/s/AKfycbxpVzSZ7CRsOSfMxfr46bTusV0qq4wmtZO2x11Gg2C--tquvFfYuWFojQjyssjS2X3ADQ/exec") {
-                fetch(requestUrl, {
-                    method: 'GET',
-                    mode: 'no-cors' // Bypasses CORS errors in the browser silently
-                }).then(() => {
-                    console.log("Visit tracked successfully.");
-                }).catch((err) => {
-                    console.error("Tracking error:", err);
-                });
-            } else {
-                console.warn("Tracking skipped: TRACKING_URL placeholder has not been replaced.");
-            }
-        }
-
-        // Fire tracking once the script loads
-        trackUserVisit();
-    </script>
+<script>
+(function(){
+  var btn=document.getElementById('copyBtn'), label=btn.querySelector('span'), code=document.getElementById('code').textContent.trim(), toast=document.getElementById('toast'), t;
+  function done(){
+    btn.classList.add('done'); label.textContent='Copied';
+    toast.classList.add('show'); clearTimeout(t);
+    t=setTimeout(function(){btn.classList.remove('done');label.textContent='Copy';toast.classList.remove('show');},2000);
+  }
+  function fallback(){
+    var ta=document.createElement('textarea'); ta.value=code; ta.setAttribute('readonly',''); ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0,99);
+    try{document.execCommand('copy');done();}catch(e){label.textContent='Hold to copy';}
+    document.body.removeChild(ta);
+  }
+  btn.addEventListener('click',function(){
+    if(navigator.clipboard && window.isSecureContext){ navigator.clipboard.writeText(code).then(done,fallback); } else { fallback(); }
+  });
+})();
+</script>
 </body>
 </html>
