@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tbay · September Top Traders</title>
+<meta name="description" content="Thank you for trading with Tbay. September's Top Traders get an exclusive 3% coupon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#003152; --navy-2:#00243d; --teal:#00CCCC; --teal-ink:#00666b; --teal-soft:#e0f5f5;
+    --gold:#FFC233; --gold-dark:#E09E00; --ink:#003152; --ink-2:#2c5470; --bg:#f3fbfb; --card:#ffffff; --line:#d7ecee;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{font-family:"Poppins",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+  .wrap{max-width:520px;margin:0 auto;padding:0 16px calc(40px + env(safe-area-inset-bottom))}
+
+  /* hero */
+  .hero{position:relative;overflow:hidden;color:#fff;padding:calc(24px + env(safe-area-inset-top)) 16px 92px;border-radius:0 0 28px 28px;
+        background:radial-gradient(320px 240px at 90% 100%,rgba(255,194,51,.28),transparent 70%),
+                   radial-gradient(340px 240px at 100% 0,rgba(0,204,204,.28),transparent 70%),
+                   linear-gradient(140deg,var(--navy-2) 0%,var(--navy) 55%,#00465e 100%)}
+  .hero .rays{position:absolute;right:-220px;bottom:-260px;width:620px;height:620px;opacity:.10;border-radius:50%;
+        background:repeating-conic-gradient(from 0deg,var(--gold) 0 6deg,transparent 6deg 18deg);
+        -webkit-mask-image:radial-gradient(circle,#000 20%,transparent 62%);mask-image:radial-gradient(circle,#000 20%,transparent 62%)}
+  .hero-in{position:relative;max-width:520px;margin:0 auto}
+  .pill{display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:var(--navy);font-weight:700;font-size:clamp(10.5px,3.2vw,12px);letter-spacing:clamp(1.2px,.5vw,2.2px);
+        padding:5px 12px;border-radius:999px;max-width:calc(100% - 72px);white-space:nowrap}
+  .pill svg{width:13px;height:13px}
+  .hero h1{max-width:calc(100% - 68px);font-size:clamp(25px,7.6vw,32px);line-height:1.15;letter-spacing:-.5px;margin-top:14px;font-weight:700;text-wrap:balance}
+  .hero h1 span{color:var(--gold)}
+  .hero p{color:#d6e7ef;font-size:clamp(14px,4vw,15.5px);margin-top:10px;max-width:420px}
+  .trophy{position:absolute;right:0;top:40px;width:56px;height:60px;filter:drop-shadow(0 10px 18px rgba(0,0,0,.35))}
+  .cf{position:absolute;border-radius:2px}
+
+  /* reward card */
+  .reward{position:relative;margin:-72px 0 0;background:var(--card);border-radius:22px;box-shadow:0 18px 40px rgba(0,49,82,.16);overflow:hidden}
+  .r-top{display:flex;align-items:center;gap:14px;padding:18px 16px 16px}
+  .r-top>div:last-child{min-width:0}
+  .pct{flex:none;width:clamp(72px,22vw,92px);height:clamp(72px,22vw,92px);border-radius:18px;background:linear-gradient(160deg,#FFD66B,#FFB300);display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--navy)}
+  .pct b{font-size:clamp(26px,8.5vw,34px);line-height:1;font-weight:700;letter-spacing:-1px}
+  .pct small{font-size:10px;font-weight:600;letter-spacing:1.2px;margin-top:3px}
+  .r-top h2{font-size:clamp(16px,4.8vw,19px);line-height:1.25}
+  .r-top .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .chip{font-size:clamp(11px,3.1vw,12px);font-weight:600;color:var(--teal-ink);background:var(--teal-soft);border-radius:999px;padding:3px 10px;white-space:nowrap}
+  .perf{position:relative;height:0;border-top:2px dashed var(--line);margin:0 16px}
+  .perf:before,.perf:after{content:"";position:absolute;top:-12px;width:22px;height:22px;border-radius:50%;background:var(--bg)}
+  .perf:before{left:-27px}.perf:after{right:-27px}
+  .r-code{padding:16px 16px 18px}
+  .r-code label{display:block;font-size:12px;font-weight:600;letter-spacing:2px;color:var(--ink-2);margin-bottom:8px}
+  .codebox{display:flex;align-items:center;gap:8px;border:2px dashed var(--teal);background:#f6fdfd;border-radius:14px;padding:6px 6px 6px 14px}
+  .codebox code{flex:1;min-width:0;font-family:inherit;font-size:clamp(17px,5.6vw,22px);font-weight:700;letter-spacing:clamp(1.5px,.9vw,4px);color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .copy{appearance:none;border:0;cursor:pointer;font:inherit;font-weight:700;font-size:15px;background:var(--navy);color:#fff;border-radius:999px;padding:10px 16px;flex:none;
+        display:inline-flex;align-items:center;gap:8px;transition:background .2s,transform .1s;min-height:44px}
+  .copy:active{transform:scale(.97)}
+  .copy svg{width:16px;height:16px;color:var(--teal)}
+  .copy.done{background:var(--teal);color:var(--navy)}
+  .copy.done svg{color:var(--navy)}
+  .hint{font-size:13px;color:var(--ink-2);margin-top:10px}
+
+  /* sections */
+  section{margin-top:28px}
+  .eyebrow{font-size:12px;font-weight:600;letter-spacing:2.2px;color:var(--teal-ink)}
+  section h3{font-size:clamp(18px,5.4vw,21px);line-height:1.25;margin-top:4px}
+  .steps{list-style:none;margin-top:14px;position:relative}
+  .steps:before{content:"";position:absolute;left:17px;top:20px;bottom:20px;border-left:2px dashed #9fdede}
+  .steps li{position:relative;display:flex;gap:14px;align-items:flex-start;padding:10px 0}
+  .num{flex:none;width:36px;height:36px;border-radius:50%;background:var(--navy);color:var(--teal);font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px var(--bg)}
+  .steps .st{display:block;font-size:15.5px;font-weight:700}
+  .steps .sd{display:block;font-size:14px;color:var(--ink-2)}
+  .steps .sd b{color:var(--ink)}
+  .path{display:inline;white-space:nowrap;font-weight:600;color:var(--navy);background:var(--teal-soft);border-radius:6px;padding:0 6px}
+
+  .terms{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:6px 16px}
+  .terms li{list-style:none;display:flex;gap:12px;align-items:flex-start;padding:12px 0;font-size:14.5px;color:var(--ink-2);border-bottom:1px solid #eef6f7}
+  .terms li:last-child{border-bottom:0}
+  .terms .ic{flex:none;width:28px;height:28px;border-radius:9px;background:var(--teal-soft);display:flex;align-items:center;justify-content:center;margin-top:1px}
+  .terms .ic svg{width:15px;height:15px}
+  .terms b{color:var(--ink)}
+
+  .closing{margin-top:30px;text-align:center;background:var(--navy);color:#fff;border-radius:22px;padding:26px 20px;position:relative;overflow:hidden}
+  .closing:before{content:"";position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(0,204,204,.35),transparent 70%)}
+  .closing h3{position:relative;font-size:clamp(19px,5.6vw,22px);text-wrap:balance}
+  .closing h3 span{color:var(--teal)}
+  .closing p{position:relative;font-size:14.5px;color:#cfe6ee;margin-top:6px}
+  footer{text-align:center;font-size:12.5px;color:var(--ink-2);margin-top:22px}
+
+  .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));white-space:nowrap;transform:translate(-50%,20px);opacity:0;background:var(--navy);color:#fff;font-size:14px;font-weight:600;
+         padding:10px 18px;border-radius:999px;box-shadow:0 10px 26px rgba(0,49,82,.3);transition:.25s;pointer-events:none}
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+
+  @media (max-width:340px){ .copy span{display:none} .copy{padding:10px 13px} .r-top{gap:12px} }
+  @media (min-width:600px){ .hero{padding:40px 24px 104px} .hero h1{font-size:38px;max-width:calc(100% - 100px)} .trophy{width:84px;height:90px;top:30px} }
+  @media (prefers-reduced-motion:reduce){ *{transition:none!important} }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="rays" aria-hidden="true"></div>
+  <div class="hero-in">
+    <svg class="trophy" viewBox="0 0 64 68" aria-hidden="true">
+      <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#FFE08A"/><stop offset=".55" stop-color="#FFC233"/><stop offset="1" stop-color="#E09E00"/></linearGradient></defs>
+      <path d="M14 6h36v14c0 11-8 19-18 19S14 31 14 20z" fill="url(#g)"/>
+      <path d="M14 10H5v5c0 7 5 12 11 12M50 10h9v5c0 7-5 12-11 12" fill="none" stroke="#FFC233" stroke-width="4" stroke-linecap="round"/>
+      <rect x="28" y="38" width="8" height="12" fill="#E09E00"/><rect x="18" y="50" width="28" height="9" rx="3" fill="url(#g)"/>
+      <path d="M32 13l2.4 5 5.4.6-4 3.7 1.1 5.3L32 25l-4.9 2.6 1.1-5.3-4-3.7 5.4-.6z" fill="#fff" opacity=".9"/>
+    </svg>
+    <span class="cf" style="right:6px;top:10px;width:9px;height:4px;background:#FFC233;transform:rotate(30deg)"></span>
+    <span class="cf" style="right:58px;top:104px;width:6px;height:6px;background:#00CCCC;border-radius:50%"></span>
+
+    <span class="pill"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17l-6.1 3.4 1.5-6.8L2.2 9l6.9-.7z"/></svg>SEPTEMBER TOP TRADERS</span>
+    <h1>Thank you for trading with us, <span>winner!</span></h1>
+    <p>You're one of Tbay's Top Traders for September. As a thank you, we've unlocked an exclusive coupon just for you.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="reward">
+    <div class="r-top">
+      <div class="pct"><b>3%</b><small>COUPON</small></div>
+      <div>
+        <h2>Your Top Trader reward</h2>
+        <div class="meta"><span class="chip">Up to 3 claims</span><span class="chip">Valid 14 days per claim</span></div>
+      </div>
+    </div>
+    <div class="perf" aria-hidden="true"></div>
+    <div class="r-code">
+      <label for="code">YOUR CODE</label>
+      <div class="codebox">
+        <code id="code">THANKYOU</code>
+        <button class="copy" id="copyBtn" type="button" aria-label="Copy code THANKYOU">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+          <span>Copy</span>
+        </button>
+      </div>
+      <p class="hint">One code, three claims. Each claim gives you a separate 3% coupon.</p>
+    </div>
+  </div>
+
+  <section aria-labelledby="how">
+    <div class="eyebrow">HOW TO REDEEM</div>
+    <h3 id="how">Claim your coupon in 4 steps</h3>
+    <ol class="steps">
+      <li><div class="num">1</div><div><span class="st">Copy your code</span><span class="sd">Tap <b>Copy</b> above to copy THANKYOU.</span></div></li>
+      <li><div class="num">2</div><div><span class="st">Open your coupons</span><span class="sd">In the Tbay app, go to <span class="path">Account → Coupons</span>.</span></div></li>
+      <li><div class="num">3</div><div><span class="st">Redeem the code</span><span class="sd">Tap <b>Redeem code</b>, paste THANKYOU and confirm.</span></div></li>
+      <li><div class="num">4</div><div><span class="st">Use it, then repeat</span><span class="sd">Your coupon appears on the Coupons page. Redeem again for up to 3 coupons in total.</span></div></li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="gtk">
+    <div class="eyebrow">GOOD TO KNOW</div>
+    <h3 id="gtk">Reward terms</h3>
+    <ul class="terms">
+      <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#003152" stroke-width="2.4" stroke-linecap="round"><path d="M4 12h16M12 4v16"/></svg></span><span>The code can be claimed <b>up to 3 times</b> in total.</span></li>
+      <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#003152" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span><span>Exclusive to <b>your account</b>. It can't be transferred or shared.</span></li>
+      <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#003152" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M6 6l12 12"/></svg></span><span>Coupons <b>can't be exchanged for cash</b>.</span></li>
+      <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#003152" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span>Each coupon is valid for <b>14 days</b> from the date you claim it.</span></li>
+    </ul>
+  </section>
+
+  <div class="closing">
+    <h3>See you on the <span>October</span> leaderboard</h3>
+    <p>Keep trading to stay among Tbay's Top Traders next month.</p>
+  </div>
+
+  <footer>© Tbay. Terms apply.</footer>
+</main>
+
+<div class="toast" id="toast" role="status">Code copied</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('copyBtn'), label=btn.querySelector('span'), code=document.getElementById('code').textContent.trim(), toast=document.getElementById('toast'), t;
+  function done(){
+    btn.classList.add('done'); label.textContent='Copied';
+    toast.classList.add('show'); clearTimeout(t);
+    t=setTimeout(function(){btn.classList.remove('done');label.textContent='Copy';toast.classList.remove('show');},2000);
+  }
+  function fallback(){
+    var ta=document.createElement('textarea'); ta.value=code; ta.setAttribute('readonly',''); ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0,99);
+    try{document.execCommand('copy');done();}catch(e){label.textContent='Hold to copy';}
+    document.body.removeChild(ta);
+  }
+  btn.addEventListener('click',function(){
+    if(navigator.clipboard && window.isSecureContext){ navigator.clipboard.writeText(code).then(done,fallback); } else { fallback(); }
+  });
+})();
+</script>
+</body>
+</html>
